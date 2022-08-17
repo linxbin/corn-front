@@ -17,7 +17,7 @@ const dashboard: AppRouteModule = {
     {
       path: 'index',
       name: 'Index',
-      component: () => import('/@/views/dashboard/analysis/index.vue'),
+      component: () => import('/@/views/task/index/index.vue'),
       meta: {
         // affix: true,
         title: t('routes.task.index'),
@@ -26,7 +26,7 @@ const dashboard: AppRouteModule = {
     {
       path: 'logs',
       name: 'Logs',
-      component: () => import('/@/views/dashboard/workbench/index.vue'),
+      component: () => import('/@/views/task/log/index.vue'),
       meta: {
         title: t('routes.task.logs'),
       },
