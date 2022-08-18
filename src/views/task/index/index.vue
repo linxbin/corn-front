@@ -1,14 +1,19 @@
 <template>
   <div class="p-4">
-    <BasicTable @register="registerTable">
-      <template #bodyCell="{ column }">
-        <template v-if="column.key === 'status'">
-          <Switch checked-children="开" un-checked-children="关" v-model:checked="checked" />
+    <BasicTable @register="registerTable" @edit-end="handleEditEnd">
+      <template #bodyCell="{ column, record }">
+        <template v-if="column.key === 'is_enable'">
+          <Switch
+            @click="handleChangeStatus(record)"
+            checked-children="开"
+            un-checked-children="关"
+            v-model:checked="record.is_enable"
+          />
         </template>
         <template v-if="column.key === 'action'">
           <a-button @click="handleOpen" color="success"> 手工执行 </a-button>
           <a-button type="primary" class="ml-2"> 编辑 </a-button>
-          <a-button color="warning" class="ml-2"> 查看日志 </a-button>
+          <a-button color="warning" class="ml-2"> 日志 </a-button>
           <a-button color="error" class="ml-2"> 删除 </a-button>
         </template>
       </template>
@@ -18,7 +23,7 @@
 <script lang="ts">
   import { defineComponent, ref } from 'vue';
   import { BasicTable, useTable, BasicColumn } from '/@/components/Table';
-  import { getListApi } from '/@/api/task';
+  import { disable, enable, getListApi } from '/@/api/task';
   import { Switch } from 'ant-design-vue';
   const columns: BasicColumn[] = [
     {
@@ -37,8 +42,8 @@
     },
     {
       title: '状态',
-      dataIndex: 'status',
-      width: 80,
+      dataIndex: 'is_enable',
+      width: 100,
     },
     {
       title: '创建时间',
@@ -73,11 +78,33 @@
         console.log('点击了启用', record);
       }
 
+      function handleEditEnd({ record, index, key, value }: Recordable) {
+        console.log(record, index, key, value);
+        return false;
+      }
+
+      function handleChangeStatus(record: Recordable) {
+        const changeStatusParams = {
+          id: record.id,
+        };
+        try {
+          if (record.is_enable) {
+            enable(changeStatusParams);
+          } else {
+            disable(changeStatusParams);
+          }
+        } catch (error) {
+          return Promise.reject(error);
+        }
+      }
+
       return {
         registerTable,
         handleDelete,
         handleOpen,
         checked,
+        handleEditEnd,
+        handleChangeStatus,
       };
     },
   });
