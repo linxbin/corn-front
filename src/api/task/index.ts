@@ -18,7 +18,7 @@ export function getListApi() {
   });
 }
 
-export function enable(params: changeStatusParams, mode: ErrorMessageMode = 'modal') {
+export function enable(params: changeStatusParams, mode: ErrorMessageMode = 'message') {
   return defHttp.post(
     {
       url: Api.Enable,
@@ -30,7 +30,7 @@ export function enable(params: changeStatusParams, mode: ErrorMessageMode = 'mod
   );
 }
 
-export function disable(params: changeStatusParams, mode: ErrorMessageMode = 'modal') {
+export function disable(params: changeStatusParams, mode: ErrorMessageMode = 'message') {
   return defHttp.post(
     {
       url: Api.Disable,

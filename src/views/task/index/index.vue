@@ -87,14 +87,10 @@
         const changeStatusParams = {
           id: record.id,
         };
-        try {
-          if (record.is_enable) {
-            enable(changeStatusParams);
-          } else {
-            disable(changeStatusParams);
-          }
-        } catch (error) {
-          return Promise.reject(error);
+        if (record.is_enable) {
+          enable(changeStatusParams);
+        } else {
+          disable(changeStatusParams);
         }
       }
 

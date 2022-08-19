@@ -44,6 +44,7 @@
   import { useUserStore } from '/@/store/modules/user';
   import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from './useLogin';
   import { useDesign } from '/@/hooks/web/useDesign';
+  import { resultError } from "../../../../mock/_util";
   //import { onKeyStroke } from '@vueuse/core';
   const FormItem = Form.Item;
   const InputPassword = Input.Password;
@@ -77,7 +78,7 @@
       const userInfo = await userStore.login({
         password: data.password,
         username: data.account,
-        mode: 'none', //不要默认的错误提示
+        mode: 'message', //不要默认的错误提示
       });
       if (userInfo) {
         notification.success({
@@ -86,12 +87,6 @@
           duration: 3,
         });
       }
-    } catch (error) {
-      createErrorModal({
-        title: t('sys.api.errorTip'),
-        content: (error as unknown as Error).message || t('sys.api.networkExceptionMsg'),
-        getContainer: () => document.body.querySelector(`.${prefixCls}`) || document.body,
-      });
     } finally {
       loading.value = false;
     }
