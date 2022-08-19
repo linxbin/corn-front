@@ -44,12 +44,11 @@
   import { useUserStore } from '/@/store/modules/user';
   import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from './useLogin';
   import { useDesign } from '/@/hooks/web/useDesign';
-  import { resultError } from "../../../../mock/_util";
-  //import { onKeyStroke } from '@vueuse/core';
   const FormItem = Form.Item;
   const InputPassword = Input.Password;
   const { t } = useI18n();
-  const { notification, createErrorModal } = useMessage();
+  const { notification } = useMessage();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-unused-vars
   const { prefixCls } = useDesign('login');
   const userStore = useUserStore();
 
