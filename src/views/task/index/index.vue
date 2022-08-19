@@ -12,7 +12,7 @@
         </template>
         <template v-if="column.key === 'action'">
           <a-button @click="handleOpen" color="success"> 手工执行 </a-button>
-          <a-button type="primary" class="ml-2"> 编辑 </a-button>
+          <a-button @click="handleEdit(record)" type="primary" class="ml-2"> 编辑 </a-button>
           <a-button color="warning" class="ml-2"> 日志 </a-button>
           <a-button color="error" class="ml-2"> 删除 </a-button>
         </template>
@@ -21,10 +21,12 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, ref } from 'vue';
+  import { defineComponent } from 'vue';
+  import { useGo } from '/@/hooks/web/usePage';
   import { BasicTable, useTable, BasicColumn } from '/@/components/Table';
   import { disable, enable, getListApi } from '/@/api/task';
   import { Switch } from 'ant-design-vue';
+  import { PageEnum } from '/@/enums/pageEnum';
   const columns: BasicColumn[] = [
     {
       title: '任务ID',
@@ -68,19 +70,13 @@
           dataIndex: 'action',
         },
       });
-
-      const checked = ref<boolean>(true);
+      const go = useGo();
 
       function handleDelete(record: Recordable) {
         console.log('点击了删除', record);
       }
       function handleOpen(record: Recordable) {
         console.log('点击了启用', record);
-      }
-
-      function handleEditEnd({ record, index, key, value }: Recordable) {
-        console.log(record, index, key, value);
-        return false;
       }
 
       function handleChangeStatus(record: Recordable) {
@@ -94,13 +90,17 @@
         }
       }
 
+      function handleEdit(record: Recordable) {
+        console.log(record);
+        go(PageEnum.TASK_EDIT_PAGE);
+      }
+
       return {
         registerTable,
         handleDelete,
         handleOpen,
-        checked,
-        handleEditEnd,
         handleChangeStatus,
+        handleEdit,
       };
     },
   });

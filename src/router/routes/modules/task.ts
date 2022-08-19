@@ -24,6 +24,16 @@ const dashboard: AppRouteModule = {
       },
     },
     {
+      path: 'edit',
+      name: 'Edit',
+      component: () => import('/@/views/task/index/edit.vue'),
+      meta: {
+        // affix: true,
+        title: t('routes.task.edit'),
+        hideMenu: true,
+      },
+    },
+    {
       path: 'logs',
       name: 'Logs',
       component: () => import('/@/views/task/log/index.vue'),
