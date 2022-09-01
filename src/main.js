@@ -32,6 +32,26 @@ Vue.component('page-header-wrapper', PageHeaderWrapper)
 
 window.umi_plugin_ant_themeVar = themePluginConfig.theme
 
+Vue.filter('formatTime', function (time) {
+  const fillZero = function (num) {
+    return num >= 10 ? num : '0' + num
+  }
+  const date = new Date(time)
+
+  const result = date.getFullYear() + '-' +
+    (fillZero(date.getMonth() + 1)) + '-' +
+    fillZero(date.getDate()) + ' ' +
+    fillZero(date.getHours()) + ':' +
+    fillZero(date.getMinutes()) + ':' +
+    fillZero(date.getSeconds())
+
+  if (result.indexOf('20') !== 0) {
+    return ''
+  }
+
+  return result
+})
+
 new Vue({
   router,
   store,

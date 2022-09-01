@@ -25,7 +25,34 @@ export const asyncRouterMap = [
             path: '/task/list',
             name: 'TaskList',
             component: () => import('@/views/task/List'),
-            meta: { title: 'menu.task.list', keepAlive: true, permission: ['task'] }
+            meta: { title: 'menu.task.list', keepAlive: true }
+          },
+          {
+            path: '/task/add',
+            name: 'TaskAdd',
+            component: () => import('@/views/task/Add'),
+            meta: { title: 'menu.task.add', keepAlive: true }
+          },
+          {
+            path: '/task/edit',
+            name: 'TaskEdit',
+            component: () => import('@/views/task/Edit'),
+            meta: { title: 'menu.task.edit', keepAlive: true },
+            hidden: true
+          },
+          {
+            path: '/task-log/list',
+            name: 'TaskLogList',
+            component: () => import('@/views/task/log/List'),
+            meta: { title: 'menu.task-log.list', keepAlive: true },
+            hidden: true
+          },
+          {
+            path: '/task-log/detail',
+            name: 'TaskLogDetail',
+            component: () => import('@/views/task/log/Detail'),
+            meta: { title: 'menu.task-log.detail', keepAlive: true },
+            hidden: true
           }
         ]
       },

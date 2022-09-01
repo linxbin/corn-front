@@ -38,5 +38,11 @@ export default {
   'menu.account.logout': '退出登录',
   // 自定义
   'menu.task': '任务管理',
-  'menu.task.list': '任务列表'
+  'menu.task.list': '任务列表',
+  'menu.task.add': '新增任务',
+  'menu.task.edit': '编辑任务',
+
+  'menu.task-log': '任务日志',
+  'menu.task-log.list': '任务日志列表',
+  'menu.task-log.detail': '任务日志详情'
 }

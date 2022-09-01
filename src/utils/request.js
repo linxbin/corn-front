@@ -23,8 +23,7 @@ const errorHandler = (error) => {
         message: 'Forbidden',
         description: data.message
       })
-    }
-    if (error.response.status === 401 && !(data.result && data.result.isLogin)) {
+    } else if (error.response.status === 401 && !(data.result && data.result.isLogin)) {
       notification.error({
         message: 'Unauthorized',
         description: data.message
@@ -36,6 +35,11 @@ const errorHandler = (error) => {
           }, 1500)
         })
       }
+    } else {
+      notification.error({
+        message: 'error',
+        description: data.message
+      })
     }
   }
   return Promise.reject(error)
