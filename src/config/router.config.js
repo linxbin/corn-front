@@ -46,13 +46,6 @@ export const asyncRouterMap = [
             component: () => import('@/views/task/log/List'),
             meta: { title: 'menu.task-log.list', keepAlive: true },
             hidden: true
-          },
-          {
-            path: '/task-log/detail',
-            name: 'TaskLogDetail',
-            component: () => import('@/views/task/log/Detail'),
-            meta: { title: 'menu.task-log.detail', keepAlive: true },
-            hidden: true
           }
         ]
       },

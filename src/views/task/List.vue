@@ -97,7 +97,7 @@ export default {
           width: '200px'
         },
         {
-          title: '表达式',
+          title: 'cron表达式',
           dataIndex: 'spec',
           align: 'center',
           width: '200px'

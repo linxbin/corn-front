@@ -27,10 +27,27 @@
         </span>
         <span slot="action" slot-scope="text, record">
           <template>
-            <a-button @click="goTaskLog(record.id)" type="primary">查看结果</a-button>
+            <a-button @click="showTaskResult(record)" type="primary">查看结果</a-button>
           </template>
         </span>
       </a-table>
+      <a-modal
+        title="任务执行结果"
+        :visible="dialogVisible"
+        :maskClosable="true"
+      >
+        <template slot="footer">
+          <a-button key="back" type="danger" @click="handleCancel">
+            关闭
+          </a-button>
+        </template>
+        <div>
+          <pre>{{ this.command }}</pre>
+        </div>
+        <div>
+          <pre>{{ this.result }}</pre>
+        </div>
+      </a-modal>
     </a-card>
   </page-header-wrapper>
 </template>
@@ -50,10 +67,15 @@ export default {
       // 表头
       columns: [
         {
-          title: '任务ID',
+          title: 'ID',
           dataIndex: 'id',
           align: 'center',
           key: 'id'
+        },
+        {
+          title: '任务ID',
+          dataIndex: 'task_id',
+          align: 'center'
         },
         {
           title: '任务名称',
@@ -90,7 +112,10 @@ export default {
         total: 0,
         pageSize: 0
       },
-      taskId: 0
+      taskId: 0,
+      dialogVisible: false,
+      command: '',
+      result: ''
     }
   },
   created () {
@@ -132,6 +157,20 @@ export default {
 
     goTaskLog () {
       this.$router.push({ name: 'TaskLogList' })
+    },
+
+    handleCancel () {
+      this.dialogVisible = false
+    },
+
+    handleOk () {
+      this.dialogVisible = false
+    },
+
+    showTaskResult (task) {
+      this.dialogVisible = true
+      this.command = task.command
+      this.result = task.result
     }
   }
 }
